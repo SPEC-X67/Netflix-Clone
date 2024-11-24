@@ -31,10 +31,9 @@ const Navbar = () => {
         navRef.current.classList.remove("nav-dark");
       }
     };
-  
+
     window.addEventListener("scroll", handleScroll);
-    
-  }, []); 
+  }, []);
 
   const handleSearch = (e) => {
     e.preventDefault();
