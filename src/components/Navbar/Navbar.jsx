@@ -12,17 +12,27 @@ const Navbar = () => {
   const navigate = useNavigate();
   const navRef = useRef();
   const [searchInput, setSearchInput] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
 
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NDg1MmYxMmYwYTNmZmI1YzZkZTAxNGNiMDU2ZDg0OCIsIm5iZiI6MTczMTg2MjgwNS45ODI4MzM5LCJzdWIiOiI2NzNhMWZkMjU4NTlmOTgxZWVkZmM1MmQiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.a9Ph8IpZRBxo8AZh01MrTpANcrLRwLvLtpy0g9fUCYY'
+    }
+  };
+
+  
   useEffect(() => {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY >= 80) {
-        navRef.current.classList.add("nav-dark");
-      } else {
-        navRef.current.classList.remove("nav-dark");
-      }
-    });
+    if (window.scrollY >= 80) {
+      navRef.current.classList.add("nav-dark");
+    } else {
+      navRef.current.classList.remove("nav-dark");
+    }
+  });
+  window.addEventListener("scroll", () => {
   }, []);
-
+  
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchInput.trim()) {
@@ -30,6 +40,27 @@ const Navbar = () => {
       setSearchInput("");
     }
   };
+  
+  const handleInput = async(e) => {
+
+    const value = e.target.value
+    setSearchInput(value);
+
+    const API_URL = `https://api.themoviedb.org/3/search/movie?query=${searchInput}&language=en-US`;
+
+    if(value.trim() == ""){
+      return setSuggestions([]);
+    }
+
+    try {
+      const response = await fetch(API_URL, options);
+      const data = await response.json();
+
+      setSuggestions(data.results.slice(0,5));
+    } catch (error) {
+      console.error("Error fetching suggestions:", error);
+    }
+  }
 
   return (
     <div className="navbar" ref={navRef}>
@@ -51,9 +82,18 @@ const Navbar = () => {
               type="text"
               placeholder="Search a movie"
               value={searchInput}
-              onChange={(e) => setSearchInput(e.target.value)}
+              onChange={handleInput}
               className="search-input"
             />
+            <div className="suggestions-list">
+              {suggestions.map((movie) => (
+                <div key={movie.id} className="suggestion-item" onClick={() => {
+                  navigate(`/search/${movie.title}`);
+                  setSearchInput("");
+                  setSuggestions([]);
+                }}>{movie.title}</div>
+              ))}
+            </div>
           </div>
         </form>
 

@@ -122,6 +122,35 @@
     border-bottom-color: #ff9900;
 }
 
+.search-container {
+    position: relative;
+  }
+  
+  .suggestions-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.566);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-height: 500px;
+    overflow-y: auto;
+    border-radius: 5px;
+  }
+  
+  .suggestion-item {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .suggestion-item:hover {
+    background-color: #74747423;
+  }
+  
+  
+
 @media (max-width: 800px) {
     .navbar {
         padding: 20px 4%;
