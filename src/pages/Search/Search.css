@@ -1,0 +1,45 @@
+.search-page {
+  padding: 20px;
+  color: white;
+}
+
+.search-page .top-ctn {
+  display: flex;
+  height: 35px;
+  margin-bottom: 30px;
+  gap: 20px;
+  align-items: center;
+}
+
+.search-page img {
+  height: 100%;
+}
+
+.search-results {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.search-card {
+  background: #1e1e1e;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  width: 250px;
+  text-decoration: none;
+  color: aliceblue;
+}
+
+.search-card img {
+  width: 100%;
+  border-radius: 8px;
+  max-height: 250px;
+  object-fit: cover;
+}
+
+.search-card h3 {
+  font-size: 14px;
+  margin-top: 10px;
+}

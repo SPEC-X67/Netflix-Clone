@@ -6,7 +6,7 @@
     position: fixed;
     font-size: 14px;
     color: #e5e5e5;
-    background-image: linear-gradient(180deg, rgba(0,0,0,0.7) 10%, transparent);
+    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 10%, transparent);
     z-index: 1;
 }
 
@@ -81,13 +81,56 @@
     background: #141414f6;
 }
 
+.search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 250px;
+    margin-right: 50px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 8px;
+    width: 19px;
+    height: 19px;
+    pointer-events: none;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px 10px 10px 40px;
+    font-size: 15px;
+    border: none;
+    background: transparent;
+    color: white;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.search-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.search-input:focus {
+    border-bottom-color: #ff9900;
+}
+
 @media (max-width: 800px) {
     .navbar {
         padding: 20px 4%;
     }
+
     .navbar-left ul {
         display: none;
     }
+
     .navbar img {
         height: 25px;
     }
@@ -97,6 +140,7 @@
     .navbar img {
         height: 20px;
     }
+
     .navbar-right {
         gap: 10px;
     }
