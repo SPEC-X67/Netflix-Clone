@@ -124,9 +124,9 @@
 
 .search-container {
     position: relative;
-  }
-  
-  .suggestions-list {
+}
+
+.suggestions-list {
     position: absolute;
     top: 100%;
     left: 0;
@@ -137,19 +137,23 @@
     max-height: 500px;
     overflow-y: auto;
     border-radius: 5px;
-  }
-  
-  .suggestion-item {
+}
+
+.suggestion-item {
     padding: 10px;
     cursor: pointer;
     transition: background-color 0.2s ease;
-  }
-  
-  .suggestion-item:hover {
+}
+
+.suggestion-item:hover {
     background-color: #74747423;
-  }
-  
-  
+}
+
+@media (max-width: 1100px) {
+    .navbar-left ul {
+        display: none;
+    }
+}
 
 @media (max-width: 800px) {
     .navbar {
@@ -170,7 +174,20 @@
         height: 20px;
     }
 
+    .navbar .bell {
+        display: none;
+    }
+
     .navbar-right {
         gap: 10px;
+    }
+
+    .search-form {
+        width: 62%;
+    }
+
+    .navbar-right {
+        display: flex;
+        justify-content: end;
     }
 }

@@ -15,24 +15,27 @@ const Navbar = () => {
   const [suggestions, setSuggestions] = useState([]);
 
   const options = {
-    method: 'GET',
+    method: "GET",
     headers: {
-      accept: 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NDg1MmYxMmYwYTNmZmI1YzZkZTAxNGNiMDU2ZDg0OCIsIm5iZiI6MTczMTg2MjgwNS45ODI4MzM5LCJzdWIiOiI2NzNhMWZkMjU4NTlmOTgxZWVkZmM1MmQiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.a9Ph8IpZRBxo8AZh01MrTpANcrLRwLvLtpy0g9fUCYY'
-    }
+      accept: "application/json",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NDg1MmYxMmYwYTNmZmI1YzZkZTAxNGNiMDU2ZDg0OCIsIm5iZiI6MTczMTg2MjgwNS45ODI4MzM5LCJzdWIiOiI2NzNhMWZkMjU4NTlmOTgxZWVkZmM1MmQiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.a9Ph8IpZRBxo8AZh01MrTpANcrLRwLvLtpy0g9fUCYY",
+    },
   };
 
-  
   useEffect(() => {
-    if (window.scrollY >= 80) {
-      navRef.current.classList.add("nav-dark");
-    } else {
-      navRef.current.classList.remove("nav-dark");
-    }
-  });
-  window.addEventListener("scroll", () => {
-  }, []);
+    const handleScroll = () => {
+      if (window.scrollY >= 80) {
+        navRef.current.classList.add("nav-dark");
+      } else {
+        navRef.current.classList.remove("nav-dark");
+      }
+    };
   
+    window.addEventListener("scroll", handleScroll);
+    
+  }, []); 
+
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchInput.trim()) {
@@ -40,15 +43,14 @@ const Navbar = () => {
       setSearchInput("");
     }
   };
-  
-  const handleInput = async(e) => {
 
-    const value = e.target.value
+  const handleInput = async (e) => {
+    const value = e.target.value;
     setSearchInput(value);
 
     const API_URL = `https://api.themoviedb.org/3/search/movie?query=${searchInput}&language=en-US`;
 
-    if(value.trim() == ""){
+    if (value.trim() == "") {
       return setSuggestions([]);
     }
 
@@ -56,11 +58,11 @@ const Navbar = () => {
       const response = await fetch(API_URL, options);
       const data = await response.json();
 
-      setSuggestions(data.results.slice(0,5));
+      setSuggestions(data.results.slice(0, 5));
     } catch (error) {
       console.error("Error fetching suggestions:", error);
     }
-  }
+  };
 
   return (
     <div className="navbar" ref={navRef}>
@@ -87,17 +89,23 @@ const Navbar = () => {
             />
             <div className="suggestions-list">
               {suggestions.map((movie) => (
-                <div key={movie.id} className="suggestion-item" onClick={() => {
-                  navigate(`/search/${movie.title}`);
-                  setSearchInput("");
-                  setSuggestions([]);
-                }}>{movie.title}</div>
+                <div
+                  key={movie.id}
+                  className="suggestion-item"
+                  onClick={() => {
+                    navigate(`/search/${movie.title}`);
+                    setSearchInput("");
+                    setSuggestions([]);
+                  }}
+                >
+                  {movie.title}
+                </div>
               ))}
             </div>
           </div>
         </form>
 
-        <img src={bell_icon} alt="" className="icons" />
+        <img src={bell_icon} alt="" className="icons bell" />
         <div className="navbar-profile">
           <img src={profile_png} alt="" className="profile" />
           <img src={caret_icon} alt="" />
