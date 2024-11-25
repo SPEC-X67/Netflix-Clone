@@ -16,6 +16,7 @@
      object-fit: cover;
      mask-image: linear-gradient(to right, transparent, black 80%);
      -webkit-mask-image: linear-gradient(to right, transparent, black 80%);
+     transition: opacity 1s ease-in-out;
  }
 
  .hero-caption {
@@ -24,6 +25,7 @@
      padding-left: 6%;
      top: 0;
      margin-top: 17%;
+     transition: opacity 1s ease-in-out;
  }
 
  .caption-img {
@@ -36,6 +38,7 @@
      max-width: 700px;
      font-size: 17px;
      margin-bottom: 20px;
+     transition: opacity 1s ease-in-out;
  }
 
  .hero-btns {

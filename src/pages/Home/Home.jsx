@@ -25,22 +25,22 @@ const Home = () => {
     }
   };
   
-  useEffect(() => {
-    fetch("https://api.themoviedb.org/3/movie/popular?language=en-US&page=1", options)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.results && data.results.length > 0) {
-          const movie = data.results[Math.floor(Math.random() * data.results.length)];
-          setHeroData({
-            title: movie.title,
-            description: movie.overview,
-            image: `https://image.tmdb.org/t/p/original${movie.backdrop_path}`,
-            id: movie.id,
-          });
-        }
-      })
-      .catch((err) => console.error("Failed to fetch hero data:", err));
-  }, []);
+    useEffect(() => {
+        fetch("https://api.themoviedb.org/3/movie/popular?language=en-US&page=1", options)
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.results && data.results.length > 0) {
+              const movie = data.results[Math.floor(Math.random() * data.results.length)];
+              setHeroData({
+                title: movie.title,
+                description: movie.overview,
+                image: `https://image.tmdb.org/t/p/original${movie.backdrop_path}`,
+                id: movie.id,
+              });
+            }
+          })
+          .catch((err) => console.error("Failed to fetch hero data:", err));
+    }, []);
   
 
   return (
